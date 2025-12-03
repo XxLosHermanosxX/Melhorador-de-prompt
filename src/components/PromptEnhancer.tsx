@@ -28,6 +28,7 @@ const PromptEnhancer = () => {
 
     setIsProcessing(true);
     setEnhancedPrompt('');
+    toast.info('Processando seu prompt...');
 
     try {
       const response = await fetch('/api/enhance-prompt', {
@@ -42,21 +43,29 @@ const PromptEnhancer = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Falha ao aprimorar o prompt');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Falha ao aprimorar o prompt');
       }
 
       const data = await response.json();
       setEnhancedPrompt(data.enhancedPrompt);
       toast.success('Prompt aprimorado com sucesso!');
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error enhancing prompt:', error);
-      toast.error('Ocorreu um erro ao aprimorar o prompt. Tente novamente.');
+      // Verificar se é um erro do JavaScript com mensagem
+      if (error instanceof Error) {
+        toast.error(`Erro: ${error.message}`);
+      } else {
+        toast.error('Ocorreu um erro desconhecido');
+      }
     } finally {
       setIsProcessing(false);
     }
   };
 
   const copyToClipboard = () => {
+    if (!enhancedPrompt) return;
+    
     navigator.clipboard.writeText(enhancedPrompt);
     toast.success('Prompt copiado para a área de transferência!');
   };
