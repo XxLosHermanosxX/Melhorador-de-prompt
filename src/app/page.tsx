@@ -3,7 +3,7 @@ import PromptEnhancer from "@/components/PromptEnhancer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen">
       <div className="container mx-auto py-8">
         <PromptEnhancer />
       </div>

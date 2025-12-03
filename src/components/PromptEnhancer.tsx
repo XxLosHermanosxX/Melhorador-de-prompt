@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Loader2, Wand2 } from 'lucide-react';
 import { toast } from 'sonner';
+import AnimatedBrain from './AnimatedBrain';
+import ProcessViewer from './ProcessViewer';
 
 const PromptEnhancer = () => {
   const [initialPrompt, setInitialPrompt] = useState('');
@@ -52,7 +54,6 @@ const PromptEnhancer = () => {
       toast.success('Prompt aprimorado com sucesso!');
     } catch (error: unknown) {
       console.error('Error enhancing prompt:', error);
-      // Verificar se é um erro do JavaScript com mensagem
       if (error instanceof Error) {
         toast.error(`Erro: ${error.message}`);
       } else {
@@ -71,94 +72,111 @@ const PromptEnhancer = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-          Prompt Enhancer
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Aprimore seus prompts com IA para obter resultados de alta qualidade
-        </p>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <label htmlFor="initial-prompt" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Prompt Inicial
-            </label>
-            <Textarea
-              id="initial-prompt"
-              placeholder="Digite seu prompt aqui..."
-              value={initialPrompt}
-              onChange={(e) => setInitialPrompt(e.target.value)}
-              className="min-h-[200px] resize-none"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="model-select" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Modelo de Aprimoramento
-            </label>
-            <Select value={selectedModel} onValueChange={setSelectedModel}>
-              <SelectTrigger>
-                <SelectValue placeholder="Selecione um modelo" />
-              </SelectTrigger>
-              <SelectContent>
-                {models.map((model) => (
-                  <SelectItem key={model.value} value={model.value}>
-                    {model.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <Button 
-            onClick={enhancePrompt} 
-            disabled={isProcessing}
-            className="w-full"
-          >
-            {isProcessing ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Aprimorando...
-              </>
-            ) : (
-              <>
-                <Wand2 className="mr-2 h-4 w-4" />
-                Aprimorar Prompt
-              </>
-            )}
-          </Button>
+    <div className="max-w-6xl mx-auto p-6 space-y-8">
+      <div className="text-center space-y-6">
+        <div className="mb-8">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
+            Prompt Enhancer
+          </h1>
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+            Aprimore seus prompts com IA para obter resultados de alta qualidade
+          </p>
         </div>
 
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label htmlFor="enhanced-prompt" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Prompt Aprimorado
+        <div className="flex justify-center my-8">
+          <AnimatedBrain isThinking={isProcessing} />
+        </div>
+      </div>
+
+      <div className="grid gap-8 lg:grid-cols-2">
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="initial-prompt" className="text-sm font-medium text-gray-300">
+                Prompt Inicial
               </label>
-              {enhancedPrompt && (
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={copyToClipboard}
-                >
-                  Copiar
-                </Button>
-              )}
+              <Textarea
+                id="initial-prompt"
+                placeholder="Digite seu prompt aqui..."
+                value={initialPrompt}
+                onChange={(e) => setInitialPrompt(e.target.value)}
+                className="min-h-[200px] resize-none bg-gray-800/50 border-gray-700 text-gray-100 focus:ring-2 focus:ring-cyan-500 focus:border-transparent rounded-xl"
+              />
             </div>
-            <Textarea
-              id="enhanced-prompt"
-              value={enhancedPrompt}
-              readOnly
-              placeholder="O prompt aprimorado aparecerá aqui..."
-              className="min-h-[200px] resize-none"
-            />
+
+            <div className="space-y-2">
+              <label htmlFor="model-select" className="text-sm font-medium text-gray-300">
+                Modelo de Aprimoramento
+              </label>
+              <Select value={selectedModel} onValueChange={setSelectedModel}>
+                <SelectTrigger className="bg-gray-800/50 border-gray-700 text-gray-100 focus:ring-2 focus:ring-cyan-500 rounded-xl">
+                  <SelectValue placeholder="Selecione um modelo" />
+                </SelectTrigger>
+                <SelectContent className="bg-gray-800 border-gray-700">
+                  {models.map((model) => (
+                    <SelectItem 
+                      key={model.value} 
+                      value={model.value}
+                      className="text-gray-100 hover:bg-gray-700"
+                    >
+                      {model.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Button 
+              onClick={enhancePrompt} 
+              disabled={isProcessing}
+              className="w-full bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-medium py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02]"
+            >
+              {isProcessing ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Processando...
+                </>
+              ) : (
+                <>
+                  <Wand2 className="mr-2 h-5 w-5" />
+                  Aprimorar Prompt
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label htmlFor="enhanced-prompt" className="text-sm font-medium text-gray-300">
+                  Prompt Aprimorado
+                </label>
+                {enhancedPrompt && (
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={copyToClipboard}
+                    className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 rounded-lg"
+                  >
+                    Copiar
+                  </Button>
+                )}
+              </div>
+              <Textarea
+                id="enhanced-prompt"
+                value={enhancedPrompt}
+                readOnly
+                placeholder="O prompt aprimorado aparecerá aqui..."
+                className="min-h-[200px] resize-none bg-gray-800/50 border-gray-700 text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent rounded-xl"
+              />
+            </div>
           </div>
         </div>
       </div>
+
+      <ProcessViewer isProcessing={isProcessing} enhancedPrompt={enhancedPrompt} />
     </div>
   );
 };
