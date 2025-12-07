@@ -42,7 +42,7 @@ const ProcessViewer = ({ isProcessing, enhancedPrompt }: {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className="text-xl font-semibold mb-4 text-cyan-300 flex items-center">
+      <h3 className="text-xl font-semibold mb-4 text-lh-orange flex items-center">
         <span className="mr-2">⚡</span> Processo da IA
       </h3>
       
@@ -52,7 +52,7 @@ const ProcessViewer = ({ isProcessing, enhancedPrompt }: {
             key={index}
             className={`flex items-center p-3 rounded-lg ${
               index === currentStep && isProcessing
-                ? "bg-cyan-900/30 border-l-4 border-cyan-400"
+                ? "bg-lh-orange/30 border-l-4 border-lh-orange"
                 : "bg-gray-700/30"
             }`}
             initial={{ opacity: 0, x: -20 }}
@@ -62,7 +62,7 @@ const ProcessViewer = ({ isProcessing, enhancedPrompt }: {
             <span className="mr-3">
               {index < currentStep || !isProcessing ? "✅" : "⏳"}
             </span>
-            <span className={index === currentStep && isProcessing ? "text-cyan-200" : "text-gray-300"}>
+            <span className={index === currentStep && isProcessing ? "text-lh-orange" : "text-gray-300"}>
               {step}
             </span>
           </motion.div>

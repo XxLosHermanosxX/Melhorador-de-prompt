@@ -24,6 +24,8 @@
     --input: 0 0% 20%;
     --ring: 180 70% 50%;
     --radius: 0.75rem;
+    /* New Los Hermanos Orange (HSL 30 100% 50% é um laranja vibrante) */
+    --los-hermanos-orange: 30 100% 50%; 
   }
 }
 

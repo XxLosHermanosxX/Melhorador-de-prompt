@@ -8,6 +8,8 @@ import { Loader2, Wand2 } from 'lucide-react';
 import { toast } from 'sonner';
 import AnimatedBrain from './AnimatedBrain';
 import ProcessViewer from './ProcessViewer';
+import LosHermanosLogo from './LosHermanosLogo';
+import AnimatedTitle from './AnimatedTitle';
 
 const PromptEnhancer = () => {
   const [initialPrompt, setInitialPrompt] = useState('');
@@ -74,14 +76,8 @@ const PromptEnhancer = () => {
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-8">
       <div className="text-center space-y-6">
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
-            Prompt Enhancer
-          </h1>
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Aprimore seus prompts com IA para obter resultados de alta qualidade
-          </p>
-        </div>
+        <LosHermanosLogo />
+        <AnimatedTitle />
 
         <div className="flex justify-center my-8">
           <AnimatedBrain isThinking={isProcessing} />
@@ -100,7 +96,7 @@ const PromptEnhancer = () => {
                 placeholder="Digite seu prompt aqui..."
                 value={initialPrompt}
                 onChange={(e) => setInitialPrompt(e.target.value)}
-                className="min-h-[200px] resize-none bg-gray-800/50 border-gray-700 text-gray-100 focus:ring-2 focus:ring-cyan-500 focus:border-transparent rounded-xl"
+                className="min-h-[200px] resize-none bg-gray-800/50 border-gray-700 text-gray-100 focus:ring-2 focus:ring-lh-orange focus:border-transparent rounded-xl"
               />
             </div>
 
@@ -109,7 +105,7 @@ const PromptEnhancer = () => {
                 Modelo de Aprimoramento
               </label>
               <Select value={selectedModel} onValueChange={setSelectedModel}>
-                <SelectTrigger className="bg-gray-800/50 border-gray-700 text-gray-100 focus:ring-2 focus:ring-cyan-500 rounded-xl">
+                <SelectTrigger className="bg-gray-800/50 border-gray-700 text-gray-100 focus:ring-2 focus:ring-lh-orange rounded-xl">
                   <SelectValue placeholder="Selecione um modelo" />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-800 border-gray-700">
@@ -129,7 +125,7 @@ const PromptEnhancer = () => {
             <Button 
               onClick={enhancePrompt} 
               disabled={isProcessing}
-              className="w-full bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-medium py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02]"
+              className="w-full bg-lh-orange hover:bg-lh-orange/90 text-gray-900 font-medium py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02]"
             >
               {isProcessing ? (
                 <>
@@ -158,7 +154,7 @@ const PromptEnhancer = () => {
                     variant="outline" 
                     size="sm"
                     onClick={copyToClipboard}
-                    className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 rounded-lg"
+                    className="border-lh-orange text-lh-orange hover:bg-lh-orange/10 rounded-lg"
                   >
                     Copiar
                   </Button>

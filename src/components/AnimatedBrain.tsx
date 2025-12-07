@@ -11,7 +11,7 @@ const AnimatedBrain = ({ isThinking }: { isThinking: boolean }) => {
         {/* Círculo de carregamento animado */}
         {isThinking && (
           <motion.div
-            className="absolute inset-0 border-4 border-cyan-400 rounded-full"
+            className="absolute inset-0 border-4 border-lh-orange rounded-full"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.7, 1, 0.7],
@@ -30,11 +30,11 @@ const AnimatedBrain = ({ isThinking }: { isThinking: boolean }) => {
             scale: isThinking ? [1, 1.1, 1] : 1,
             boxShadow: isThinking 
               ? [
-                  "0 0 0px rgba(56, 189, 248, 0)",
-                  "0 0 20px rgba(56, 189, 248, 0.5)",
-                  "0 0 0px rgba(56, 189, 248, 0)"
+                  "0 0 0px rgba(255, 165, 0, 0)", 
+                  "0 0 20px rgba(255, 165, 0, 0.5)", 
+                  "0 0 0px rgba(255, 165, 0, 0)"
                 ]
-              : "0 0 0px rgba(56, 189, 248, 0)"
+              : "0 0 0px rgba(255, 165, 0, 0)"
           }}
           transition={{
             duration: isThinking ? 2 : 0,
@@ -47,7 +47,7 @@ const AnimatedBrain = ({ isThinking }: { isThinking: boolean }) => {
             size={80} 
             className={`${
               isThinking 
-                ? "text-cyan-400" 
+                ? "text-lh-orange" 
                 : "text-gray-400"
             } transition-colors duration-300`}
           />
@@ -57,7 +57,7 @@ const AnimatedBrain = ({ isThinking }: { isThinking: boolean }) => {
       {/* Indicador de pensamento */}
       {isThinking && (
         <motion.div
-          className="mt-4 text-cyan-400 font-medium"
+          className="mt-4 text-lh-orange font-medium"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
