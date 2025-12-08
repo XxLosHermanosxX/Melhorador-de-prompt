@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 const LosHermanosLogo = () => {
   return (
     <motion.div
-      className="flex flex-col items-center justify-center mb-6"
+      className="flex flex-col items-center justify-center mb-6 animate-float"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
