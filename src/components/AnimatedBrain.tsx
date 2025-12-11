@@ -28,13 +28,8 @@ const AnimatedBrain = ({ isThinking }: { isThinking: boolean }) => {
         <motion.div
           animate={{
             scale: isThinking ? [1, 1.1, 1] : 1,
-            boxShadow: isThinking 
-              ? [
-                  "0 0 0px rgba(255, 165, 0, 0)", 
-                  "0 0 20px rgba(255, 165, 0, 0.5)", 
-                  "0 0 0px rgba(255, 165, 0, 0)"
-                ]
-              : "0 0 0px rgba(255, 165, 0, 0)"
+            // Removendo o boxShadow animado para evitar artefatos de fundo, 
+            // confiando apenas no brilho da cor do ícone e no círculo externo.
           }}
           transition={{
             duration: isThinking ? 2 : 0,
@@ -47,7 +42,7 @@ const AnimatedBrain = ({ isThinking }: { isThinking: boolean }) => {
             size={80} 
             className={`${
               isThinking 
-                ? "text-lh-orange" 
+                ? "text-lh-orange drop-shadow-[0_0_10px_rgba(255,165,0,0.8)]" // Adicionando um drop-shadow limpo diretamente ao ícone
                 : "text-gray-400"
             } transition-colors duration-300`}
           />
