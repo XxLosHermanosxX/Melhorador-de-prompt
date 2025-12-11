@@ -14,14 +14,15 @@ import AnimatedTitle from './AnimatedTitle';
 const PromptEnhancer = () => {
   const [initialPrompt, setInitialPrompt] = useState('');
   const [enhancedPrompt, setEnhancedPrompt] = useState('');
-  const [selectedModel, setSelectedModel] = useState('google/gemma-2-9b-it:free'); // Novo modelo padrão
+  const [selectedModel, setSelectedModel] = useState('mistralai/devstral-2512:free'); // Novo modelo padrão
   const [isProcessing, setIsProcessing] = useState(false);
 
   const models = [
-    { value: 'google/gemma-2-9b-it:free', label: 'Google Gemma 2 9B (Free)' },
-    { value: 'mistralai/mistral-7b-instruct:free', label: 'Mistral 7B Instruct (Free)' },
-    { value: 'meta-llama/llama-3-8b-instruct:free', label: 'Llama 3 8B Instruct (Free)' },
+    { value: 'mistralai/devstral-2512:free', label: 'Mistral Devstral 2512 (Free)' },
+    { value: 'amazon/nova-2-lite-v1:free', label: 'Amazon Nova 2 Lite V1 (Free)' },
     { value: 'tngtech/deepseek-r1t2-chimera:free', label: 'DeepSeek R1T2 Chimera (Free)' },
+    { value: 'z-ai/glm-4.5-air:free', label: 'GLM 4.5 Air (Free)' },
+    { value: 'nvidia/nemotron-nano-12b-v2-vl:free', label: 'NVIDIA Nemotron Nano 12B (Free)' },
   ];
 
   const enhancePrompt = async () => {
