@@ -14,8 +14,15 @@ export async function POST(request: NextRequest) {
     // System prompt para aprimorar o prompt do usuário
     const systemPrompt = `Você é um especialista em engenharia de prompt de nível mundial. Sua tarefa é aprimorar o prompt fornecido pelo usuário, tornando-o mais detalhado, específico e eficaz. O aprimoramento deve seguir rigorosamente as melhores práticas de prompting, como a inclusão de um Papel (Role), uma Tarefa (Task) clara, Restrições/Regras e um Formato de Saída definido. O prompt a ser aprimorado é: ${prompt}`;
 
-    // Chave de API atualizada
-    const OPENROUTER_API_KEY = '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';
+    // Usando variável de ambiente para proteger a chave
+    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+
+    if (!OPENROUTER_API_KEY) {
+      return NextResponse.json(
+        { error: 'Chave de API não configurada no servidor.' },
+        { status: 500 }
+      );
+    }
 
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',

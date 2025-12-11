@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Rajdhani } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import SecurityOverlay from "@/components/SecurityOverlay";
+import UserLocationDisplay from "@/components/UserLocationDisplay";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const rajdhani = Rajdhani({ 
@@ -23,6 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${rajdhani.variable}`}>
       <body>
+        <SecurityOverlay />
+        <UserLocationDisplay />
         {children}
         <Toaster />
       </body>
