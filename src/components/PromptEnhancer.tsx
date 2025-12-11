@@ -74,12 +74,12 @@ const PromptEnhancer = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8">
-      <div className="text-center space-y-6">
+    <div className="max-w-6xl mx-auto p-6 space-y-6 md:space-y-8">
+      <div className="text-center space-y-2">
         <LosHermanosLogo />
         <AnimatedTitle />
 
-        <div className="flex justify-center my-8">
+        <div className="flex justify-center mt-4 mb-8">
           <AnimatedBrain isThinking={isProcessing} />
         </div>
       </div>

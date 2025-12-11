@@ -15,7 +15,7 @@ const AnimatedTitle = () => {
       >
         <TypeAnimation
           sequence={[
-            'Prompt Enhancer',
+            'Aprimorador de Prompt - Sites',
             1000,
           ]}
           wrapper="span"
