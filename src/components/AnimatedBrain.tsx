@@ -42,7 +42,7 @@ const AnimatedBrain = ({ isThinking }: { isThinking: boolean }) => {
             size={80} 
             className={`${
               isThinking 
-                ? "text-lh-orange drop-shadow-[0_0_10px_rgba(255,165,0,0.8)]" // Adicionando um drop-shadow limpo diretamente ao ícone
+                ? "text-lh-orange drop-shadow-[0_0_10px_rgba(255,165,0,0.8)]" // Mantendo o drop-shadow, mas a cor será o novo lh-orange
                 : "text-gray-400"
             } transition-colors duration-300`}
           />
