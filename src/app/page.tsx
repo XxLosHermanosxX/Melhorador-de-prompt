@@ -1,4 +1,4 @@
-import { MadeWithDyad } from "@/components/made-with-dyad";
+import { FooterAttribution } from "@/components/FooterAttribution";
 import PromptEnhancer from "@/components/PromptEnhancer";
 import AbstractBackground from "@/components/AbstractBackground";
 
@@ -9,7 +9,7 @@ export default function Home() {
       <div className="container mx-auto py-4 md:py-6 relative z-10">
         <PromptEnhancer />
       </div>
-      <MadeWithDyad />
+      <FooterAttribution />
     </div>
   );
 }
