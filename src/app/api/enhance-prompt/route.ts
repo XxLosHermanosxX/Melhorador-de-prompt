@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const { prompt, model } = await request.json();
+    // Recebendo a chave de API do corpo da requisição
+    const { prompt, model, openRouterKey } = await request.json();
 
-    if (!prompt || !model) {
+    if (!prompt || !model || !openRouterKey) {
       return NextResponse.json(
-        { error: 'Prompt e modelo são obrigatórios' },
+        { error: 'Prompt, modelo e chave de API são obrigatórios' },
         { status: 400 }
       );
     }
@@ -14,21 +15,12 @@ export async function POST(request: NextRequest) {
     // System prompt para aprimorar o prompt do usuário
     const systemPrompt = `Você é um especialista em engenharia de prompt de nível mundial. Sua tarefa é aprimorar o prompt fornecido pelo usuário, tornando-o mais detalhado, específico e eficaz. O aprimoramento deve seguir rigorosamente as melhores práticas de prompting, como a inclusão de um Papel (Role), uma Tarefa (Task) clara, Restrições/Regras e um Formato de Saída definido. O prompt a ser aprimorado é: ${prompt}`;
 
-    // Usando variável de ambiente para proteger a chave
-    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-
-    if (!OPENROUTER_API_KEY) {
-      return NextResponse.json(
-        { error: 'Chave de API não configurada no servidor.' },
-        { status: 500 }
-      );
-    }
-
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        // Usando a chave fornecida pelo usuário
+        'Authorization': `Bearer ${openRouterKey}`,
         'HTTP-Referer': 'https://dyad.sh',
         'X-Title': 'Prompt Enhancer',
       },

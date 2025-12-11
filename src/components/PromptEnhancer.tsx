@@ -10,11 +10,13 @@ import AnimatedBrain from './AnimatedBrain';
 import ProcessViewer from './ProcessViewer';
 import LosHermanosLogo from './LosHermanosLogo';
 import AnimatedTitle from './AnimatedTitle';
+import { Input } from '@/components/ui/input'; // Importando o componente Input
 
 const PromptEnhancer = () => {
   const [initialPrompt, setInitialPrompt] = useState('');
   const [enhancedPrompt, setEnhancedPrompt] = useState('');
-  const [selectedModel, setSelectedModel] = useState('mistralai/devstral-2512:free'); // Novo modelo padrão
+  const [selectedModel, setSelectedModel] = useState('mistralai/devstral-2512:free');
+  const [openRouterKey, setOpenRouterKey] = useState(''); // Novo estado para a chave
   const [isProcessing, setIsProcessing] = useState(false);
 
   const models = [
@@ -28,6 +30,10 @@ const PromptEnhancer = () => {
   const enhancePrompt = async () => {
     if (!initialPrompt.trim()) {
       toast.error('Por favor, insira um prompt inicial para aprimorar.');
+      return;
+    }
+    if (!openRouterKey.trim()) {
+      toast.error('Por favor, insira sua chave de API do OpenRouter.');
       return;
     }
 
@@ -44,6 +50,7 @@ const PromptEnhancer = () => {
         body: JSON.stringify({
           prompt: initialPrompt,
           model: selectedModel,
+          openRouterKey: openRouterKey, // Enviando a chave para o backend
         }),
       });
 
@@ -121,6 +128,20 @@ const PromptEnhancer = () => {
                     ))}
                   </SelectContent>
               </Select>
+            </div>
+            
+            <div className="space-y-2">
+              <label htmlFor="openrouter-key" className="text-sm font-medium text-gray-300">
+                Chave de API OpenRouter (sk-or-v1-...)
+              </label>
+              <Input
+                id="openrouter-key"
+                type="password"
+                placeholder="Insira sua chave de API aqui"
+                value={openRouterKey}
+                onChange={(e) => setOpenRouterKey(e.target.value)}
+                className="bg-gray-800/50 border-gray-700 text-gray-100 focus:ring-2 focus:ring-lh-orange focus:border-transparent rounded-xl"
+              />
             </div>
 
             <Button 
