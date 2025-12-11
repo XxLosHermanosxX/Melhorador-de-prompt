@@ -12,7 +12,8 @@ export default {
   	extend: {
         fontFamily: {
             sans: ["var(--font-sans)", ...fontFamily.sans],
-            orbitron: ["var(--font-orbitron)", ...fontFamily.sans],
+            orbitron: ["var(--font-orbitron)", ...fontFamily.sans], // Mantendo Orbitron por enquanto, mas adicionando Rajdhani
+            rajdhani: ["var(--font-rajdhani)", ...fontFamily.sans],
         },
   		colors: {
   			background: 'hsl(var(--background))',

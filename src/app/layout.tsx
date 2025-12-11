@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
+import { Inter, Rajdhani } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
+const rajdhani = Rajdhani({ 
+  subsets: ["latin"], 
+  weight: ["400", "700"], // Importando pesos necessários
+  variable: "--font-rajdhani" 
+});
 
 export const metadata: Metadata = {
   title: "Prompt Enhancer",
@@ -17,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${orbitron.variable}`}>
+    <html lang="en" className={`${inter.variable} ${rajdhani.variable}`}>
       <body>
         {children}
         <Toaster />
