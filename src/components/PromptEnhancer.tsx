@@ -14,14 +14,14 @@ import AnimatedTitle from './AnimatedTitle';
 const PromptEnhancer = () => {
   const [initialPrompt, setInitialPrompt] = useState('');
   const [enhancedPrompt, setEnhancedPrompt] = useState('');
-  const [selectedModel, setSelectedModel] = useState('x-ai/grok-4.1-fast:free');
+  const [selectedModel, setSelectedModel] = useState('google/gemma-2-9b-it:free'); // Novo modelo padrão
   const [isProcessing, setIsProcessing] = useState(false);
 
   const models = [
-    { value: 'x-ai/grok-4.1-fast:free', label: 'Grok 4.1 Fast (Free)' },
+    { value: 'google/gemma-2-9b-it:free', label: 'Google Gemma 2 9B (Free)' },
+    { value: 'mistralai/mistral-7b-instruct:free', label: 'Mistral 7B Instruct (Free)' },
+    { value: 'meta-llama/llama-3-8b-instruct:free', label: 'Llama 3 8B Instruct (Free)' },
     { value: 'tngtech/deepseek-r1t2-chimera:free', label: 'DeepSeek R1T2 Chimera (Free)' },
-    { value: 'kwaipilot/kat-coder-pro:free', label: 'KAT Coder Pro (Free)' },
-    { value: 'z-ai/glm-4.5-air:free', label: 'GLM 4.5 Air (Free)' }
   ];
 
   const enhancePrompt = async () => {
@@ -109,16 +109,16 @@ const PromptEnhancer = () => {
                   <SelectValue placeholder="Selecione um modelo" />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-800 border-gray-700">
-                  {models.map((model) => (
-                    <SelectItem 
-                      key={model.value} 
-                      value={model.value}
-                      className="text-gray-100 hover:bg-gray-700"
-                    >
-                      {model.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
+                    {models.map((model) => (
+                      <SelectItem 
+                        key={model.value} 
+                        value={model.value}
+                        className="text-gray-100 hover:bg-gray-700"
+                      >
+                        {model.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
               </Select>
             </div>
 
